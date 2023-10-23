@@ -26,12 +26,21 @@ class ProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(product: Product) {
+    var cellViewModel: ProductCellViewModel? {
+        didSet {
+            
+            if let cellViewM = cellViewModel {
+                configureCell(product: cellViewM)
+            }
+        }
+    }
+    
+    func configureCell(product: ProductCellViewModel) {
        
-        let url = URL(string: product.category.image)
+        let url = URL(string: product.image)
         productImg.kf.setImage(with: url)
         titlelbl.text = product.title
-        nameLbl.text = product.category.name
+        nameLbl.text = product.name
     }
     
 }
